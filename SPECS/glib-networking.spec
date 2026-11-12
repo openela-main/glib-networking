@@ -6,12 +6,15 @@
 
 Name:           glib-networking
 Version:        2.68.3
-Release:        3%{?dist}
+Release:        3%{?dist}.1
 Summary:        Networking support for GLib
 
 License:        LGPLv2+
 URL:            http://www.gnome.org
 Source0:        http://download.gnome.org/sources/glib-networking/2.68/%{name}-%{tarball_version}.tar.xz
+
+# https://gitlab.gnome.org/GNOME/glib-networking/-/commit/2df47856016fdd3ac7544cc7c899b22819c29c4e
+Patch0:         glib-networking-2.68.3-CVE-2026-103963.patch
 
 BuildRequires:  meson
 BuildRequires:  gcc
@@ -82,6 +85,10 @@ the functionality of the installed glib-networking package.
 %{_datadir}/installed-tests
 
 %changelog
+* Thu Oct 29 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 2.68.3-3.1
+- CVE-2026-103963 glib-networking: Unbounded TLS 1.3 session ticket queue growth in glib-networking allows remote denial of service
+- Resolves: RHEL-295662
+
 * Thu Feb 24 2022 Michael Catanzaro <mcatanzaro@redhat.com> - 2.68.3-3
 - Recommends: libproxy-webkitgtk4 for glib-pacrunner
 - Related: #2056988
